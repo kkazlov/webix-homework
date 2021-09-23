@@ -13,7 +13,11 @@
     color: #fff;
 }
 
-.header__btn .webix_button:hover {
+.webix_toolbar.webix_dark .webix_secondary button {
+    background: none;
+}
+
+.webix_toolbar.webix_dark .webix_secondary button:hover {
     background: none;
 }
 
@@ -30,7 +34,6 @@
 
 .content__list .webix_list {
     background: #eeeeee;
-    border: none;
 }
 
 .content__list .webix_list_item {
@@ -41,20 +44,18 @@
     background: #c5baba;
 }
 
-.content__list .webix_button {
-    color: #87ab84;
+.content__status {
     background: none;
-    cursor: unset;
-}
 
-.content__list .webix_button:hover {
-    background: none;
-}
-
-.content__list .webix_icon_btn.wxi-check {
+    text-align: center;
     color: #87ab84;
 }
 
-footer {
+.webix_icon.wxi-check {
+    color: #87ab84;
+}
+
+
+.footer {
     text-align: center;
 }
