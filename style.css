@@ -1,0 +1,60 @@
+/* Header */
+.header {
+    background: #657584;
+}
+
+.header__label .webix_el_box {
+    color: #fff;
+}
+
+.header__btn .webix_button {
+    background: none;
+
+    color: #fff;
+}
+
+.header__btn .webix_button:hover {
+    background: none;
+}
+
+.header__btn .webix_icon_btn.wxi-user {
+    color: #fff;
+}
+
+
+/* Content-list */
+
+.content__list {
+    background: #eeeeee;
+}
+
+.content__list .webix_list {
+    background: #eeeeee;
+    border: none;
+}
+
+.content__list .webix_list_item {
+    transition: background ease-in-out 0.2s;
+}
+
+.content__list .webix_list_item:hover {
+    background: #c5baba;
+}
+
+.content__list .webix_button {
+    color: #87ab84;
+    background: none;
+    cursor: unset;
+}
+
+.content__list .webix_button:hover {
+    background: none;
+}
+
+.content__list .webix_icon_btn.wxi-check {
+    color: #87ab84;
+}
+
+footer {
+    text-align: center;
+}
