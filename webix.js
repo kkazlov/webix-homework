@@ -1,4 +1,19 @@
 import small_film_set from "./db.js";
+const popupProfile = webix.ui({
+    view: "popup", id:"popup-profile",
+    maxWidth: 400, maxHeight:300,
+    body: {
+        view: "list",
+        template: "#title#",
+        scroll: false,
+        select: true,
+        autoheight: true,
+        data: [
+            { id: 1, title: "Settings" },
+            { id: 2, title: "Log Out" },
+        ],
+    }
+});
 
 const label = {
     view: "label",
@@ -9,6 +24,7 @@ const label = {
 
 const btnHeader = {
     view: "button",
+    id:"btn-profile",
     type: "icon",
     icon: "wxi-user",
     label: "Profile",
@@ -16,6 +32,9 @@ const btnHeader = {
     autowidth: true,
 
     css: "webix_transparent",
+    click: function() {
+        popupProfile.show($$('btn-profile').getNode(), {pos:"center"});
+    }
 };
 
 const contentList = {
@@ -97,7 +116,7 @@ webix.ready(() => {
             {
                 //header
                 view: "toolbar",
-                id: "myToolbar",
+                id: "myHeader",
                 paddingX: 10,
                 cols: [label, {}, btnHeader],
                 css: "webix_dark",
