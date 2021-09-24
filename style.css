@@ -1,0 +1,42 @@
+/* Header */
+.header {
+    background: #657584;
+}
+
+.header__label .webix_el_box {
+    color: #fff;
+}
+
+
+/* Content-list */
+
+.content__list {
+    background: #eeeeee;
+}
+
+.content__list .webix_list {
+    background: #eeeeee;
+}
+
+.content__list .webix_list_item {
+    transition: background ease-in-out 0.2s;
+}
+
+.content__list .webix_list_item:hover {
+    background: #c5baba;
+}
+
+.content__status {
+    background: none;
+
+    text-align: center;
+    color: #87ab84;
+}
+
+.webix_icon.wxi-check {
+    color: #87ab84;
+}
+
+.footer {
+    text-align: center;
+}
