@@ -15,7 +15,7 @@ const btnHeader = {
     align: "right",
     autowidth: true,
 
-    css: "header__btn",
+    css: "webix_transparent",
 };
 
 const contentList = {
@@ -40,8 +40,8 @@ const contentStatus = {
         <span class='webix_icon wxi-check'></span> 
         Connected
     `,
-    css: 'content__status'
-}
+    css: "content__status",
+};
 
 const formInputs = {
     rows: [
@@ -55,6 +55,7 @@ const formInputs = {
             label: "Title",
             name: "title",
         },
+        
         {
             view: "text",
             label: "Year",
@@ -73,7 +74,7 @@ const formInputs = {
             name: "votes",
         },
     ],
-}
+};
 
 const formBtns = {
     cols: [
@@ -82,42 +83,40 @@ const formBtns = {
             value: "Add new",
             css: "webix_primary",
         },
+        
         {
             view: "button",
             value: "Clear",
         },
     ],
-}
+};
 
 webix.ready(() => {
     webix.ui({
         rows: [
-            {   //header
+            {
+                //header
                 view: "toolbar",
                 id: "myToolbar",
                 paddingX: 10,
-                cols: [
-                    label,
-                    {},
-                    btnHeader
-                ],
-                css:"webix_dark",
+                cols: [label, {}, btnHeader],
+                css: "webix_dark",
             },
 
-            {   //content
+            {
+                //content
                 cols: [
-                    {   //content-list
+                    {
+                        //content-list
                         type: "clear",
-                        rows: [
-                            contentList,
-                            contentStatus
-                        ],
+                        rows: [contentList, contentStatus],
                         css: "content__list",
                     },
 
                     { view: "resizer" },
 
-                    {   //content-dataTable
+                    {
+                        //content-dataTable
                         gravity: 4,
                         view: "datatable",
                         autoConfig: true,
@@ -125,22 +124,19 @@ webix.ready(() => {
 
                         data: small_film_set,
                     },
-                    
-                    {   //form
+
+                    {
+                        //form
                         gravity: 2,
                         view: "form",
 
-                        elements: [
-                            formInputs,
-                            formBtns,
-                            {}
-                        ],
+                        elements: [formInputs, formBtns, {}],
                     },
                 ],
             },
 
-            
-            {   //footer
+            {
+                //footer
                 autoheight: true,
                 view: "template",
                 template: `
@@ -148,7 +144,7 @@ webix.ready(() => {
                     <a href="https://webix.com/">https://webix.com/</a>
                     All rights reserved ©
                 `,
-                css: "footer"
+                css: "footer",
             },
         ],
     });

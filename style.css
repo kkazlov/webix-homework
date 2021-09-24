@@ -7,24 +7,6 @@
     color: #fff;
 }
 
-.header__btn .webix_button {
-    background: none;
-
-    color: #fff;
-}
-
-.webix_toolbar.webix_dark .webix_secondary button {
-    background: none;
-}
-
-.webix_toolbar.webix_dark .webix_secondary button:hover {
-    background: none;
-}
-
-.header__btn .webix_icon_btn.wxi-user {
-    color: #fff;
-}
-
 
 /* Content-list */
 
@@ -54,7 +36,6 @@
 .webix_icon.wxi-check {
     color: #87ab84;
 }
-
 
 .footer {
     text-align: center;
