@@ -1,4 +1,5 @@
 import small_film_set from "./db.js";
+
 const popupProfile = webix.ui({
     view: "popup", id:"popup-profile",
     maxWidth: 400, maxHeight:300,
@@ -101,13 +102,50 @@ const formBtns = {
             view: "button",
             value: "Add new",
             css: "webix_primary",
+            click: function() {
+                const formValidation = $$("myForm").validate();
+                if (formValidation) {
+                    const values = $$("myForm").getValues();
+                    $$("myTable").add(values);
+                    webix.message('New film was added');
+                }
+                
+            }
         },
         
         {
             view: "button",
             value: "Clear",
+            click: function() {
+                webix.confirm({
+                    title: "Clear",
+                    id: "myConfirm",
+                    text: "Do you want clear the table?"
+                }).then(
+                    function() {
+                        $$('myForm').clear();
+                        $$('myTable').clearAll();
+                    },
+                    function() {
+                        $$('myConfirm').close();
+                    }
+                )
+            }
         },
     ],
+};
+
+const formRules = {
+    title: webix.rules.isNotEmpty,
+    year: function(value) {
+        return value >= 1970 && value <= 2021;
+    },
+    votes: function(value) {
+        return value < 100000 && value !== "";
+    },
+    rating: function(value) {
+        return value !== 0 && value !== "";
+    },
 };
 
 webix.ready(() => {
@@ -138,6 +176,7 @@ webix.ready(() => {
                         //content-dataTable
                         gravity: 4,
                         view: "datatable",
+                        id:"myTable",
                         autoConfig: true,
                         scrollX: false,
 
@@ -148,8 +187,14 @@ webix.ready(() => {
                         //form
                         gravity: 2,
                         view: "form",
-
+                        id: "myForm",
                         elements: [formInputs, formBtns, {}],
+                        rules: formRules,
+                        on: {
+                            onValidationError: function() {
+                                webix.message({text:"Enter the correct value!", type:"error"})
+                            }
+                        }
                     },
                 ],
             },
