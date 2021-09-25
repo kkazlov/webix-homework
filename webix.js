@@ -1,4 +1,4 @@
-import small_film_set from "./db.js";
+import small_film_set from "./webix/db.js";
 
 const popupProfile = webix.ui({
     view: "popup", id:"popup-profile",
