@@ -1,6 +1,7 @@
 const popupProfile = webix.ui({
-    view: "popup", id:"popupProfile",
-    maxWidth: 400, maxHeight:300,
+    view: "popup",
+    id: "popupProfile",
+    width: 400,
     body: {
         view: "list",
         template: "#title#",
@@ -11,7 +12,7 @@ const popupProfile = webix.ui({
             { id: 1, title: "Settings" },
             { id: 2, title: "Log Out" },
         ],
-    }
+    },
 });
 
 const label = {
@@ -23,17 +24,16 @@ const label = {
 
 const btnHeader = {
     view: "button",
-    id:"btn-profile",
+    id: "btn-profile",
     type: "icon",
     icon: "wxi-user",
     label: "Profile",
-    align: "right",
     autowidth: true,
 
     css: "webix_transparent",
-    click: function() {
-        popupProfile.show($$('btn-profile').getNode(), {pos:"center"});
-    }
+    click: function () {
+        popupProfile.show(this.$view);
+    },
 };
 
 const header = {
@@ -42,6 +42,6 @@ const header = {
     paddingX: 10,
     cols: [label, {}, btnHeader],
     css: "webix_dark",
-}
+};
 
 export default header;

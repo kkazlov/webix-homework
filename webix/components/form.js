@@ -15,9 +15,11 @@ const formBtns = {
             value: "Add new",
             css: "webix_primary",
             click: function () {
-                const formValidation = $$("myForm").validate();
+                const form = this.getFormView();
+                const formValidation = form.validate();
+
                 if (formValidation) {
-                    const values = $$("myForm").getValues();
+                    const values = form.getValues();
                     $$("myTable").add(values);
                     webix.message("New film was added");
                 }
@@ -31,18 +33,12 @@ const formBtns = {
                 webix
                     .confirm({
                         title: "Clear",
-                        id: "myConfirm",
-                        text: "Do you want clear the table?",
+                        text: "Do you want clear the form?",
                     })
-                    .then(
-                        function () {
-                            $$("myForm").clear();
-                            $$("myTable").clearAll();
-                        },
-                        function () {
-                            $$("myConfirm").close();
-                        }
-                    );
+                    .then(function () {
+                        $$("myForm").clear();
+                        $$("myForm").clearValidation();
+                    });
             },
         },
     ],
@@ -51,13 +47,14 @@ const formBtns = {
 const formRules = {
     title: webix.rules.isNotEmpty,
     year: function (value) {
-        return value >= 1970 && value <= 2021;
+        const currentYear = new Date().getFullYear();
+        return value >= 1970 && value <= currentYear;
     },
     votes: function (value) {
-        return value < 100000 && value !== "";
+        return value < 100000;
     },
     rating: function (value) {
-        return value !== 0 && value !== "";
+        return value !== 0 && webix.rules.isNotEmpty(value);
     },
 };
 
@@ -65,13 +62,9 @@ const form = {
     gravity: 2,
     view: "form",
     id: "myForm",
+    elementsConfig: { invalidMessage: "Enter the correct value!" },
     elements: [formInputs, formBtns, {}],
     rules: formRules,
-    on: {
-        onValidationError: function () {
-            webix.message({ text: "Enter the correct value!", type: "error" });
-        },
-    },
 };
 
 export default form;
