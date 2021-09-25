@@ -36,8 +36,9 @@ const formBtns = {
                         text: "Do you want clear the form?",
                     })
                     .then(function () {
-                        $$("myForm").clear();
-                        $$("myForm").clearValidation();
+                        const myForm = $$("myForm");
+                        myForm.clear();
+                        myForm.clearValidation();
                     });
             },
         },
