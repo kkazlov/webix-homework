@@ -2,11 +2,13 @@ const usersChart = {
     view: "chart",
     type: "bar",
     value: "#age#",
-    
-    label: "#age#",
+    xAxis: {
+        template: "#age#",
+        title: "Age",
+    },
+
     barWidth: 35,
     radius: 0,
-    gradient: "falling",
     url: "../../webix/data/users.js",
 };
 

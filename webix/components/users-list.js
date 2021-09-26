@@ -41,8 +41,6 @@ const userToolbar = {
     cols: [toolbarInput, ascBtn, descBtn],
 };
 
-/* let className = */
-
 const list = {
     view: "list",
     id: "usersList",
@@ -54,7 +52,7 @@ const list = {
                 </div>
             `;
     },
-    css:"user-list",
+    css: "user-list",
     select: true,
     url: "../../webix/data/users.js",
 
