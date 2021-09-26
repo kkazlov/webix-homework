@@ -5,28 +5,34 @@ const toolbarInput = {
     gravity: 4,
 
     on: {
-        onTimedKeyPress: function() {
+        onTimedKeyPress: function () {
             const value = this.getValue().toLowerCase();
 
-            $$("usersList").filter(function(obj){
+            $$("usersList").filter(function (obj) {
                 let filter = [obj.name, obj.country].join("|");
                 filter = filter.toString().toLowerCase();
-                return (filter.indexOf(value) != -1);
-            })
-        }
-    }
+                return filter.indexOf(value) != -1;
+            });
+        },
+    },
 };
 
 const ascBtn = {
     view: "button",
     value: "Sort asc",
     css: "webix_primary",
+    click: function () {
+        $$("usersList").sort("#name#", "asc");
+    },
 };
 
 const descBtn = {
     view: "button",
     value: "Sort desc",
     css: "webix_primary",
+    click: function () {
+        $$("usersList").sort("#name#", "desc");
+    },
 };
 
 const userToolbar = {
@@ -35,17 +41,29 @@ const userToolbar = {
     cols: [toolbarInput, ascBtn, descBtn],
 };
 
+/* let className = */
+
 const list = {
     view: "list",
     id: "usersList",
-    template: `
-        <div class='user-list__item'>
-            #name# from #country# 
-            <span class='webix_icon wxi-close'></span>
-        </div>
-    `,
+    template: function ({ name, country }) {
+        return `
+                <div class='user-list__item'>
+                    ${name} from ${country}
+                    <span class='webix_icon wxi-close'></span>
+                </div>
+            `;
+    },
+    css:"user-list",
     select: true,
     url: "../../webix/data/users.js",
+
+    onClick: {
+        "wxi-close": function (e, id) {
+            this.remove(id);
+            return false;
+        },
+    },
 };
 
 const usersList = {
