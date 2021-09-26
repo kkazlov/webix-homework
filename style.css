@@ -7,7 +7,6 @@
     color: #fff;
 }
 
-
 /* Content-list */
 
 .content__list {
@@ -37,8 +36,18 @@
     color: #87ab84;
 }
 
+/* DataTable */
+
 .webix_icon.wxi-trash {
     cursor: pointer;
+}
+
+.datatable__id {
+    background: #f4f4f4;
+}
+
+.datatable__hover {
+    background: #dad4d4;
 }
 
 .footer {

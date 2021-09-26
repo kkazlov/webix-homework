@@ -17,8 +17,9 @@ const dataTable = {
     view: "datatable",
     id: "myTable",
     select: "row",
+    hover: "datatable__hover",
     columns: [
-        { id: "id", header: "", fillspace: 1 },
+        { id: "id", header: "", fillspace: 1, css: "datatable__id" },
         {
             id: "title",
             header: ["Film title", { content: "textFilter" }],
@@ -31,7 +32,7 @@ const dataTable = {
                 "Released",
                 { content: "textFilter", compare: compareFirstChar },
             ],
-            fillspace: 1,
+            fillspace: 2,
             sort: "int",
         },
         {
@@ -40,7 +41,7 @@ const dataTable = {
                 "Votes",
                 { content: "textFilter", compare: compareFirstChar },
             ],
-            fillspace: 1,
+            fillspace: 2,
             sort: sortVotes,
         },
         {
