@@ -8,41 +8,51 @@ const formInputs = {
     ],
 };
 
+const saveBtn = {
+    view: "button",
+    value: "Save",
+    css: "webix_primary",
+    click: function () {
+        const myTable = $$("myTable");
+        const myForm = $$("myForm");
+        const formData = myForm.getValues();
+        const { id } = formData;
+
+        if (id) {
+            myTable.updateItem(id, formData);
+            webix.message("Film was updated");
+        } else {
+            const formValidation = myForm.validate();
+
+            if (formValidation) {
+                myTable.add(formData);
+
+                webix.message("New film was added");
+                myForm.clear();
+            }
+        }
+    },
+};
+
+const clearBtn = {
+    view: "button",
+    value: "Clear",
+    click: function () {
+        webix
+            .confirm({
+                title: "Clear",
+                text: "Do you want clear the form?",
+            })
+            .then(function () {
+                const form = $$("myForm");
+                form.clear();
+                form.clearValidation();
+            });
+    },
+};
+
 const formBtns = {
-    cols: [
-        {
-            view: "button",
-            value: "Add new",
-            css: "webix_primary",
-            click: function () {
-                const form = this.getFormView();
-                const formValidation = form.validate();
-
-                if (formValidation) {
-                    const values = form.getValues();
-                    $$("myTable").add(values);
-                    webix.message("New film was added");
-                }
-            },
-        },
-
-        {
-            view: "button",
-            value: "Clear",
-            click: function () {
-                webix
-                    .confirm({
-                        title: "Clear",
-                        text: "Do you want clear the form?",
-                    })
-                    .then(function () {
-                        const myForm = $$("myForm");
-                        myForm.clear();
-                        myForm.clearValidation();
-                    });
-            },
-        },
-    ],
+    cols: [saveBtn, clearBtn],
 };
 
 const formRules = {

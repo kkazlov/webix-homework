@@ -4,12 +4,16 @@ const contentList = {
     borderless: true,
     scroll: false,
     select: true,
-    data: [
-        { id: 1, title: "Dashboard" },
-        { id: 2, title: "Users" },
-        { id: 3, title: "Products" },
-        { id: 4, title: "Locations" },
+    data: [ 
+        { id: "Dashboard", title: "Dashboard" },
+        { id: "Users", title: "Users" },
+        { id: "Products", title: "Products" },
+        { id: "Locations", title: "Locations" },
     ],
+    on: {
+        onAfterSelect:function(id){
+        $$(id).show();
+    }}
 };
 
 const contentStatus = {
@@ -24,9 +28,11 @@ const contentStatus = {
 };
 
 const sidebar = {
+    width: 200,
     type: "clear",
     rows: [contentList, contentStatus],
     css: "content__list",
 };
+
 
 export default sidebar;

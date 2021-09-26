@@ -1,13 +1,17 @@
-import small_film_set from "../db.js";
-
 const dataTable = {
     gravity: 4,
     view: "datatable",
     id:"myTable",
     autoConfig: true,
     scrollX: false,
+    on: {
+        onAfterSelect: function(id) {
+            const values = this.getItem(id);
+            $$("myForm").setValues(values);
+        }
+    },
 
-    data: small_film_set
+    url:"../../webix/data/data.js"
 };
 
 export default dataTable;
