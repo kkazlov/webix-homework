@@ -37,6 +37,10 @@
     color: #87ab84;
 }
 
+.webix_icon.wxi-trash {
+    cursor: pointer;
+}
+
 .footer {
     text-align: center;
 }
