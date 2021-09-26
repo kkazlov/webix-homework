@@ -1,6 +1,8 @@
 import sidebar from "./sidebar.js";
 import dataTable from "./datatable.js";
 import form from "./form.js";
+import usersList from "./users-list.js";
+import usersChart from "./users-chart.js";
 
 const content = {
     cols: [
@@ -9,40 +11,7 @@ const content = {
         {
             cells: [
                 { id: "Dashboard", cols: [dataTable, form] },
-
-
-                {
-                    id: "Users",
-                    rows: [
-                        {
-                            view: "list",
-                            template: "#title#",
-                            select: true,
-                            data: [
-                                { id: 1, title: "Item 1" },
-                                { id: 2, title: "Item 2" },
-                                { id: 3, title: "Item 3" },
-                            ],
-                        },
-                        
-                        {
-                            view: "chart",
-                            type: "bar",
-                            value: "#sales#",
-                            label: "#sales#",
-                            barWidth: 35,
-                            radius: 0,
-                            gradient: "falling",
-                            data: [
-                                { id: 1, sales: 20, year: "02" },
-                                { id: 2, sales: 55, year: "03" },
-                                { id: 3, sales: 40, year: "04" },
-                                { id: 4, sales: 78, year: "05" },
-                            ],
-                        },
-                    ],
-                },
-
+                { id: "Users", rows: [usersList, usersChart] },
 
                 {
                     id: "Products",

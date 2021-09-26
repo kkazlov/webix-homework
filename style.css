@@ -53,3 +53,12 @@
 .footer {
     text-align: center;
 }
+
+/* UserList */
+
+.user-list__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
