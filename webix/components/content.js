@@ -13,7 +13,8 @@ const content = {
             cells: [
                 { id: "Dashboard", cols: [dataTable, form] },
                 { id: "Users", rows: [usersList, usersChart] },
-                treetable
+                treetable,
+                { id: "Locations"}
             ],
         },
     ],
