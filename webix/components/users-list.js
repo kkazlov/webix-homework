@@ -9,7 +9,7 @@ const toolbarInput = {
             const value = this.getValue().toLowerCase();
 
             $$("usersList").filter(function (obj) {
-                let filter = [obj.name, obj.country].join("|");
+                let filter = [obj.name, obj.country].join("");
                 filter = filter.toString().toLowerCase();
                 return filter.indexOf(value) != -1;
             });

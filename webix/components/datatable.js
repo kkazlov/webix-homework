@@ -28,10 +28,7 @@ const dataTable = {
         },
         {
             id: "year",
-            header: [
-                "Released",
-                { content: "textFilter", compare: compareFirstChar },
-            ],
+            header: ["Released", { content: "numberFilter" }],
             fillspace: 2,
             sort: "int",
         },
@@ -60,8 +57,17 @@ const dataTable = {
     },
     onClick: {
         "wxi-trash": function (e, id) {
-            this.remove(id);
-            return false;
+            webix
+            .confirm({
+                title: "Delete",
+                text: "Do you want delete this record?",
+            })
+            .then(() => {
+                this.remove(id);
+                $$('myForm').clear();
+                return false;
+            });
+            
         },
     },
 

@@ -19,8 +19,14 @@ const saveBtn = {
         const { id } = formData;
 
         if (id) {
-            myTable.updateItem(id, formData);
-            webix.message("Film was updated");
+            const formValidation = myForm.validate();
+
+            if (formValidation) {
+                myTable.updateItem(id, formData);
+                webix.message("Film was updated");
+            }
+
+            
         } else {
             const formValidation = myForm.validate();
 
@@ -62,6 +68,7 @@ const formRules = {
         return value >= 1970 && value <= currentYear;
     },
     votes: function (value) {
+        value = value.replace(/,/, ".");
         return value < 100000;
     },
     rating: function (value) {

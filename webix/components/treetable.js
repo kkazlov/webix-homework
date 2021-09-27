@@ -3,15 +3,15 @@ const treetable = {
     view: "treetable",
     select: "cell",
     columns: [
-        { id: "id", header: "", width: 50, open: true },
+        { id: "id", header: "", width: 50 },
         {
             id: "value",
             header: "title",
-            open: true,
+            
             width: 250,
             template: "{common.treetable()} #title#",
         },
-        { id: "price", header: "price", width: 200, open: true },
+        { id: "price", header: "price", width: 200, },
     ],
     url: "../../webix/data/products.js",
     on: {
