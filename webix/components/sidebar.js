@@ -1,19 +1,28 @@
 const contentList = {
     view: "list",
+    id:"myList",
     template: "#title#",
     borderless: true,
     scroll: false,
     select: true,
-    data: [ 
+    data: [
         { id: "Dashboard", title: "Dashboard" },
         { id: "Users", title: "Users" },
         { id: "Products", title: "Products" },
         { id: "Locations", title: "Locations" },
     ],
+    
+    ready: function() {
+        this.select("Dashboard");
+        $$("Dashboard").show();
+    },
+
     on: {
-        onAfterSelect:function(id){
-        $$(id).show();
-    }}
+        onAfterSelect: function (id) {
+            $$(id).show();
+        },
+        
+    }, 
 };
 
 const contentStatus = {
@@ -33,6 +42,5 @@ const sidebar = {
     rows: [contentList, contentStatus],
     css: "content__list",
 };
-
 
 export default sidebar;
