@@ -15,22 +15,18 @@ const saveBtn = {
     click: function () {
         const myTable = $$("myTable");
         const myForm = $$("myForm");
-        const formData = myForm.getValues();
-        const { id } = formData;
-        const formValidation = myForm.validate();
+        
+        if (myForm.validate()) {
+            const formData = myForm.getValues();
+            const { id } = formData;
 
-        if (id) {
-            if (formValidation) {
+            if (id) {
                 myTable.updateItem(id, formData);
-                webix.message("Film was updated");
-            }
-        } else {
-            if (formValidation) {
+            } else {
                 myTable.add(formData);
-
-                webix.message("New film was added");
                 myForm.clear();
             }
+            webix.message(id ? "Film was updated" : "New film was added");
         }
     },
 };
