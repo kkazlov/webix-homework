@@ -8,41 +8,48 @@ const formInputs = {
     ],
 };
 
+const saveBtn = {
+    view: "button",
+    value: "Save",
+    css: "webix_primary",
+    click: function () {
+        const myTable = $$("myTable");
+        const myForm = $$("myForm");
+        
+        if (myForm.validate()) {
+            const formData = myForm.getValues();
+            const { id } = formData;
+
+            if (id) {
+                myTable.updateItem(id, formData);
+            } else {
+                myTable.add(formData);
+                myForm.clear();
+            }
+            webix.message(id ? "Film was updated" : "New film was added");
+        }
+    },
+};
+
+const clearBtn = {
+    view: "button",
+    value: "Clear",
+    click: function () {
+        webix
+            .confirm({
+                title: "Clear",
+                text: "Do you want clear the form?",
+            })
+            .then(function () {
+                const form = $$("myForm");
+                form.clear();
+                form.clearValidation();
+            });
+    },
+};
+
 const formBtns = {
-    cols: [
-        {
-            view: "button",
-            value: "Add new",
-            css: "webix_primary",
-            click: function () {
-                const form = this.getFormView();
-                const formValidation = form.validate();
-
-                if (formValidation) {
-                    const values = form.getValues();
-                    $$("myTable").add(values);
-                    webix.message("New film was added");
-                }
-            },
-        },
-
-        {
-            view: "button",
-            value: "Clear",
-            click: function () {
-                webix
-                    .confirm({
-                        title: "Clear",
-                        text: "Do you want clear the form?",
-                    })
-                    .then(function () {
-                        const myForm = $$("myForm");
-                        myForm.clear();
-                        myForm.clearValidation();
-                    });
-            },
-        },
-    ],
+    cols: [saveBtn, clearBtn],
 };
 
 const formRules = {
@@ -52,6 +59,7 @@ const formRules = {
         return value >= 1970 && value <= currentYear;
     },
     votes: function (value) {
+        value = value.replace(/,/, ".");
         return value < 100000;
     },
     rating: function (value) {
