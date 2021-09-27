@@ -14,7 +14,6 @@ const contentList = {
     
     ready: function() {
         this.select("Dashboard");
-        $$("Dashboard").show();
     },
 
     on: {
