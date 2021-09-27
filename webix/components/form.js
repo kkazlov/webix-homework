@@ -17,19 +17,14 @@ const saveBtn = {
         const myForm = $$("myForm");
         const formData = myForm.getValues();
         const { id } = formData;
+        const formValidation = myForm.validate();
 
         if (id) {
-            const formValidation = myForm.validate();
-
             if (formValidation) {
                 myTable.updateItem(id, formData);
                 webix.message("Film was updated");
             }
-
-            
         } else {
-            const formValidation = myForm.validate();
-
             if (formValidation) {
                 myTable.add(formData);
 

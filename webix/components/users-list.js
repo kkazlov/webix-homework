@@ -8,10 +8,13 @@ const toolbarInput = {
         onTimedKeyPress: function () {
             const value = this.getValue().toLowerCase();
 
-            $$("usersList").filter(function (obj) {
-                let filter = [obj.name, obj.country].join("");
-                filter = filter.toString().toLowerCase();
-                return filter.indexOf(value) != -1;
+            $$("usersList").filter(function ({ name, country }) {
+                name = name.toString().toLowerCase();
+                country = country.toString().toLowerCase();
+
+                return (
+                    name.indexOf(value) != -1 || country.indexOf(value) != -1
+                );
             });
         },
     },
@@ -48,7 +51,7 @@ const list = {
         return `
                 <div class='user-list__item'>
                     ${name} from ${country}
-                    <span class='webix_icon wxi-close'></span>
+                    <span class='webix_icon wxi-close removeBtn'></span>
                 </div>
             `;
     },
@@ -57,7 +60,7 @@ const list = {
     url: "../../webix/data/users.js",
 
     onClick: {
-        "wxi-close": function (e, id) {
+        removeBtn: function (e, id) {
             this.remove(id);
             return false;
         },
