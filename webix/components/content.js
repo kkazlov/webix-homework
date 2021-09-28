@@ -4,6 +4,7 @@ import form from "./form.js";
 import usersList from "./users-list.js";
 import usersChart from "./users-chart.js";
 import treetable from "./treetable.js";
+import datatableTabbar from "./datatable-tabbar.js";
 
 const content = {
     cols: [
@@ -11,10 +12,19 @@ const content = {
         { view: "resizer" },
         {
             cells: [
-                { id: "Dashboard", cols: [dataTable, form] },
+                {
+                    id: "Dashboard",
+                    cols: [
+                        {
+                            rows: [datatableTabbar, dataTable],
+                            gravity: 4,
+                        },
+                        form,
+                    ],
+                },
                 { id: "Users", rows: [usersList, usersChart] },
                 treetable,
-                { id: "Locations"}
+                { id: "Locations" },
             ],
         },
     ],
