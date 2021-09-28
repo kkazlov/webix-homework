@@ -93,7 +93,7 @@ const dataTable = {
                         case "oldFilms":
                             return value < 1970;
                         case "modernFilms": 
-                            return (value > 1970 && value < 2000);
+                            return (value >= 1970 && value <= 2000);
                         case "newFilms": 
                             return (value > 2000);
                         default:
