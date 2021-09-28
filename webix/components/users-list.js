@@ -45,8 +45,13 @@ const userToolbar = {
 };
 
 const list = {
-    view: "list",
+    view: "editlist",
     id: "usersList",
+    editable: true,
+    editor: "text",
+    editValue: "name",
+    rules: { name: webix.rules.isNotEmpty },
+
     template: function ({ name, country }) {
         return `
                 <div class='user-list__item'>
@@ -55,14 +60,35 @@ const list = {
                 </div>
             `;
     },
+
     css: "user-list",
     select: true,
-    url: "../../webix/data/users.js",
-
     onClick: {
         removeBtn: function (e, id) {
             this.remove(id);
             return false;
+        },
+    },
+
+    url: "../../webix/data/users.js",
+    scheme: {
+        $init: function (obj) {
+            if(obj.age < 26) {
+                obj.$css = 'user-list__highlight';
+            }
+
+        },
+    },
+    on: {
+        onAfterLoad: function () {
+            $$("usersChart").sync($$("usersList"), function() {
+                $$("usersChart").group({
+                    by: "country",
+                    map: {
+                        count:['country', 'count']
+                    }
+                })
+            });
         },
     },
 };
