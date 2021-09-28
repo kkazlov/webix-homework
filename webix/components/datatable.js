@@ -1,3 +1,5 @@
+import categoriesDB from '../data/categories.js';
+
 const compareFirstChar = (value, filter) => {
     value = value.toString().toLowerCase();
     filter = filter.toString().toLowerCase();
@@ -18,6 +20,13 @@ const dataTable = {
     id: "myTable",
     select: "row",
     hover: "datatable__hover",
+    scheme:{
+        $init:function(obj){
+            const rnd =  Math.floor(1 + Math.random() * 4);
+            obj.categoryId = rnd;
+        },
+    },
+
     columns: [
         { id: "id", header: "", fillspace: 1, css: "datatable__id" },
         {
@@ -25,6 +34,13 @@ const dataTable = {
             header: ["Film title", { content: "textFilter" }],
             sort: "string",
             fillspace: 4,
+        },
+        {
+            id: "categoryId",
+            header: ["Category", { content: "selectFilter" }],
+            sort: "string",
+            fillspace: 2,
+            collection: categoriesDB
         },
         {
             id: "year",
@@ -49,12 +65,7 @@ const dataTable = {
         },
     ],
     scrollX: false,
-    on: {
-        onAfterSelect: function (id) {
-            const values = this.getItem(id);
-            $$("myForm").setValues(values);
-        },
-    },
+    
     onClick: {
         "wxi-trash": function (e, id) {
             webix
@@ -69,6 +80,10 @@ const dataTable = {
             });
             
         },
+    },
+
+    ready: function() {
+        $$("myForm").bind(this);
     },
 
     url: "../../webix/data/data.js",
