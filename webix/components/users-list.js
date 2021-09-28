@@ -40,16 +40,16 @@ const descBtn = {
     },
 };
 
+const randomInteger = (max) => {
+    let rand = Math.random() * max;
+        return Math.floor(rand);
+};
+
 const addBtn = {
     view: "button",
     value: "Add new",
     css: "webix_primary",
     click: function () {
-        function randomInteger(max) {
-            let rand = Math.random() * max;
-            return Math.floor(rand);
-        }
-
         const rndAge = randomInteger(100);
         const rndCountry = randomInteger(countriesDB.length);
 

@@ -7,7 +7,9 @@ const usersChart = {
         template: "#country#",
         title: "country",
     },
-    yAxis:{},
+    yAxis:{
+        start: 0
+    },
 
     barWidth: 35,
     radius: 0,
