@@ -95,6 +95,11 @@ const dataTable = {
 
     columns: tableColumns,
     scrollX: false,
+    on: {
+        onAfterSelect: function () {
+            $$("myForm").clearValidation();
+        },
+    },
 
     onClick: {
         "wxi-trash": function (e, id) {
