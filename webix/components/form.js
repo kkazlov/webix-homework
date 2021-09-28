@@ -15,16 +15,17 @@ const saveBtn = {
     click: function () {
         const myTable = $$("myTable");
         const myForm = $$("myForm");
-        
+
         if (myForm.validate()) {
             const formData = myForm.getValues();
             const { id } = formData;
 
             if (id) {
-                myTable.updateItem(id, formData);
+                myForm.save();
             } else {
-                myTable.add(formData);
+                myForm.save();
                 myForm.clear();
+                myTable.unselectAll();
             }
             webix.message(id ? "Film was updated" : "New film was added");
         }

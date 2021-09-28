@@ -1,15 +1,19 @@
 const usersChart = {
     view: "chart",
     type: "bar",
-    value: "#age#",
+    id: "usersChart",
+    value:"#count#",
     xAxis: {
-        template: "#age#",
-        title: "Age",
+        template: "#country#",
+        title: "country",
+    },
+    yAxis:{
+        start: 0
     },
 
     barWidth: 35,
     radius: 0,
-    url: "../../webix/data/users.js",
+   
 };
 
 export default usersChart;

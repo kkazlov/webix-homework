@@ -1,3 +1,5 @@
+import countriesDB from "../data/countries.js";
+
 const toolbarInput = {
     view: "text",
     id: "usersInput",
@@ -38,15 +40,41 @@ const descBtn = {
     },
 };
 
+const randomInteger = (max) => {
+    let rand = Math.random() * max;
+    return Math.floor(rand);
+};
+
+const addBtn = {
+    view: "button",
+    value: "Add new",
+    css: "webix_primary",
+    click: function () {
+        const rndAge = randomInteger(100);
+        const rndCountry = randomInteger(countriesDB.length);
+
+        $$("usersList").add({
+            name: "Anthony Soprano",
+            country: countriesDB[rndCountry].value,
+            age: rndAge,
+        });
+    },
+};
+
 const userToolbar = {
     view: "toolbar",
     id: "userToolbar",
-    cols: [toolbarInput, ascBtn, descBtn],
+    cols: [toolbarInput, ascBtn, descBtn, addBtn],
 };
 
 const list = {
-    view: "list",
+    view: "editlist",
     id: "usersList",
+    editable: true,
+    editor: "text",
+    editValue: "name",
+    rules: { name: webix.rules.isNotEmpty },
+
     template: function ({ name, country }) {
         return `
                 <div class='user-list__item'>
@@ -55,14 +83,36 @@ const list = {
                 </div>
             `;
     },
+
     css: "user-list",
     select: true,
-    url: "../../webix/data/users.js",
-
     onClick: {
         removeBtn: function (e, id) {
             this.remove(id);
             return false;
+        },
+    },
+
+    url: "../../webix/data/users.js",
+    scheme: {
+        $init: function (obj) {
+            if (obj.age < 26) {
+                obj.$css = "user-list__highlight";
+            }
+        },
+    },
+    on: {
+        onAfterLoad: function () {
+            $$("usersChart").sync($$("usersList"), function () {
+                $$("usersChart").group({
+                    by: "country",
+                    map: {
+                        count: ["country", "count"],
+                    },
+                });
+
+                $$("usersChart").sort("country", "asc");
+            });
         },
     },
 };
