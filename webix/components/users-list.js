@@ -42,7 +42,7 @@ const descBtn = {
 
 const randomInteger = (max) => {
     let rand = Math.random() * max;
-        return Math.floor(rand);
+    return Math.floor(rand);
 };
 
 const addBtn = {
@@ -110,6 +110,8 @@ const list = {
                         count: ["country", "count"],
                     },
                 });
+
+                $$("usersChart").sort("country", "asc");
             });
         },
     },

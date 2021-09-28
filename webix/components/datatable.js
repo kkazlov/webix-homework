@@ -49,6 +49,38 @@ const tableColumns = [
     },
 ];
 
+const tableReady = function () {
+    $$("myForm").bind(this);
+    this.registerFilter(
+        $$("myTabbar"),
+        {
+            columnId: "year",
+            compare: function (value, filter) {
+                switch(filter) {
+                    case "allFilms": 
+                        return value;
+                    case "oldFilms":
+                        return value < 1970;
+                    case "modernFilms": 
+                        return (value >= 1970 && value <= 2000);
+                    case "newFilms": 
+                        return (value > 2000);
+                    default:
+                        return value;
+                }
+            },
+        },
+        {
+            getValue: function (node) {
+                return node.getValue();
+            },
+            setValue: function (node, value) {
+                node.setValue(value);
+            },
+        }
+    );
+};
+
 const dataTable = {
     view: "datatable",
     id: "myTable",
@@ -79,38 +111,7 @@ const dataTable = {
         },
     },
 
-    ready: function () {
-        $$("myForm").bind(this);
-
-        this.registerFilter(
-            $$("myTabbar"),
-            {
-                columnId: "year",
-                compare: function (value, filter) {
-                    switch(filter) {
-                        case "allFilms": 
-                            return value;
-                        case "oldFilms":
-                            return value < 1970;
-                        case "modernFilms": 
-                            return (value >= 1970 && value <= 2000);
-                        case "newFilms": 
-                            return (value > 2000);
-                        default:
-                            return value;
-                    }
-                },
-            },
-            {
-                getValue: function (node) {
-                    return node.getValue();
-                },
-                setValue: function (node, value) {
-                    node.setValue(value);
-                },
-            }
-        );
-    },
+    ready: tableReady,
 
     url: "../../webix/data/data.js",
 };
