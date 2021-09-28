@@ -1,3 +1,5 @@
+import countriesDB from "../data/countries.js";
+
 const toolbarInput = {
     view: "text",
     id: "usersInput",
@@ -38,10 +40,31 @@ const descBtn = {
     },
 };
 
+const addBtn = {
+    view: "button",
+    value: "Add new",
+    css: "webix_primary",
+    click: function () {
+        function randomInteger(max) {
+            let rand = Math.random() * max;
+            return Math.floor(rand);
+        }
+
+        const rndAge = randomInteger(100);
+        const rndCountry = randomInteger(countriesDB.length);
+
+        $$("usersList").add({
+            name: "Anthony Soprano",
+            country: countriesDB[rndCountry].value,
+            age: rndAge,
+        });
+    },
+};
+
 const userToolbar = {
     view: "toolbar",
     id: "userToolbar",
-    cols: [toolbarInput, ascBtn, descBtn],
+    cols: [toolbarInput, ascBtn, descBtn, addBtn],
 };
 
 const list = {
@@ -73,21 +96,20 @@ const list = {
     url: "../../webix/data/users.js",
     scheme: {
         $init: function (obj) {
-            if(obj.age < 26) {
-                obj.$css = 'user-list__highlight';
+            if (obj.age < 26) {
+                obj.$css = "user-list__highlight";
             }
-
         },
     },
     on: {
         onAfterLoad: function () {
-            $$("usersChart").sync($$("usersList"), function() {
+            $$("usersChart").sync($$("usersList"), function () {
                 $$("usersChart").group({
                     by: "country",
                     map: {
-                        count:['country', 'count']
-                    }
-                })
+                        count: ["country", "count"],
+                    },
+                });
             });
         },
     },
