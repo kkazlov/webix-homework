@@ -1,6 +1,4 @@
-const categoriesDB = new webix.DataCollection({
-	url: '../../webix/data/categories.js'
-});
+import { categoriesDB } from "../data/collections.js";
 
 const compareFirstChar = (value, filter) => {
     value = value.toString().toLowerCase();
@@ -124,3 +122,4 @@ const dataTable = {
 };
 
 export default dataTable;
+

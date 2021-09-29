@@ -1,3 +1,13 @@
+const groupChart = function () {
+    $$("usersChart").group({
+        by: "country",
+        map: {
+            count: ["country", "count"],
+        },
+    });
+    $$("usersChart").sort("country", "asc");
+};
+
 const usersChart = {
     view: "chart",
     type: "bar",
@@ -17,3 +27,4 @@ const usersChart = {
 };
 
 export default usersChart;
+export { groupChart };
