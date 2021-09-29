@@ -1,11 +1,11 @@
 const groupChart = function () {
-    $$("usersChart").group({
+    this.group({
         by: "country",
         map: {
             count: ["country", "count"],
         },
     });
-    $$("usersChart").sort("country", "asc");
+    this.sort("country", "asc");
 };
 
 const usersChart = {
