@@ -10,6 +10,7 @@ const formInputs = {
         {
             view: "richselect",
             id: "formRichSelect",
+            name: "categoryId",
             label: "categoryId",
             value: 0,
             options: categoriesDB,
@@ -28,6 +29,7 @@ const saveBtn = {
         if (myForm.validate()) {
             const formData = myForm.getValues();
             const { id } = formData;
+            console.log(id);
 
             if (id) {
                 myForm.save();
@@ -56,6 +58,7 @@ const clearBtn = {
                 $$("formRichSelect").setValue(0);
                 form.clear();
                 form.clearValidation();
+                $$("myTable").unselectAll();
             });
     },
 };
@@ -76,6 +79,9 @@ const formRules = {
     },
     rating: function (value) {
         return value !== 0 && webix.rules.isNotEmpty(value);
+    },
+    categoryId: function (value) {
+        return webix.rules.isNotEmpty(value);
     },
 };
 

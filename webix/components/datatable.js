@@ -15,7 +15,7 @@ const sortVotes = (a, b) => {
 };
 
 const tableColumns = [
-    { id: "id", header: "", fillspace: 1, css: "datatable__id" },
+    { id: "id", header: "", fillspace: 4, css: "datatable__id" },
     {
         id: "title",
         header: ["Film title", { content: "textFilter" }],
@@ -51,20 +51,21 @@ const tableColumns = [
 
 const tableReady = function () {
     $$("myForm").bind(this);
+
     this.registerFilter(
         $$("myTabbar"),
         {
             columnId: "year",
             compare: function (value, filter) {
-                switch(filter) {
-                    case "allFilms": 
+                switch (filter) {
+                    case "allFilms":
                         return value;
                     case "oldFilms":
                         return value < 1970;
-                    case "modernFilms": 
-                        return (value >= 1970 && value <= 2000);
-                    case "newFilms": 
-                        return (value > 2000);
+                    case "modernFilms":
+                        return value >= 1970 && value <= 2000;
+                    case "newFilms":
+                        return value > 2000;
                     default:
                         return value;
                 }
@@ -86,18 +87,18 @@ const dataTable = {
     id: "myTable",
     select: "row",
     hover: "datatable__hover",
-    scheme: {
-        $init: function (obj) {
-            const rnd = Math.floor(1 + Math.random() * 4);
-            obj.categoryId = rnd;
-        },
-    },
 
     columns: tableColumns,
     scrollX: false,
     on: {
         onAfterSelect: function () {
             $$("myForm").clearValidation();
+        },
+        onAfterLoad: function () {
+            this.data.each(function (obj) {
+                obj.categoryId = Math.floor(1 + Math.random() * 4);
+            });
+            this.refresh();
         },
     },
 
@@ -122,4 +123,3 @@ const dataTable = {
 };
 
 export default dataTable;
-
