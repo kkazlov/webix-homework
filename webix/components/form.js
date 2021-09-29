@@ -29,7 +29,6 @@ const saveBtn = {
         if (myForm.validate()) {
             const formData = myForm.getValues();
             const { id } = formData;
-            console.log(id);
 
             if (id) {
                 myForm.save();
