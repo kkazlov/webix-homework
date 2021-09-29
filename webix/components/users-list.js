@@ -1,13 +1,5 @@
 import countriesDB from "../data/countries.js";
 
-const highlightAge = function() {
-    this.each(function(obj) {
-        if (obj.age < 26) {
-            obj.$css = "user-list__highlight";
-        }
-    });
-};
-
 const toolbarInput = {
     view: "text",
     id: "usersInput",
@@ -115,4 +107,3 @@ const usersList = {
 };
 
 export default usersList;
-export { highlightAge };
