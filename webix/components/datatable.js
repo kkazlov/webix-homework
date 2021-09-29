@@ -15,7 +15,7 @@ const sortVotes = (a, b) => {
 };
 
 const tableColumns = [
-    { id: "id", header: "", fillspace: 4, css: "datatable__id" },
+    { id: "id", header: "", fillspace: 1, css: "datatable__id" },
     {
         id: "title",
         header: ["Film title", { content: "textFilter" }],
