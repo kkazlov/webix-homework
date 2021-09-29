@@ -1,5 +1,9 @@
 import countriesDB from "../data/countries.js";
 
+const usersDB = new webix.DataCollection({
+    url:"../../webix/data/users.js"
+})
+
 const toolbarInput = {
     view: "text",
     id: "usersInput",
@@ -100,6 +104,9 @@ const list = {
                 obj.$css = "user-list__highlight";
             }
         },
+    },
+    ready: function() {
+        this.sync(usersDB);
     },
     on: {
         onAfterLoad: function () {

@@ -1,4 +1,6 @@
-import categoriesDB from "../data/categories.js";
+const categoriesDB = new webix.DataCollection({
+	url: '../../webix/data/categories.js'
+});
 
 const compareFirstChar = (value, filter) => {
     value = value.toString().toLowerCase();
