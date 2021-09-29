@@ -8,12 +8,12 @@ const formInputs = {
         { view: "text", label: "Rating", name: "rating" },
         { view: "text", label: "Votes", name: "votes" },
         {
-            view:"richselect",
+            view: "richselect",
             id: "formRichSelect",
-            label:"categoryId", 
-            value:0,
-            options: categoriesDB
-        }
+            label: "categoryId",
+            value: 0,
+            options: categoriesDB,
+        },
     ],
 };
 
