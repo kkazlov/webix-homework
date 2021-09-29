@@ -32,11 +32,12 @@ const saveBtn = {
 
             if (id) {
                 myForm.save();
+                myTable.filterByAll();
             } else {
                 myForm.save();
+                myTable.filterByAll();
                 myForm.clear();
                 myTable.unselectAll();
-                $$("formRichSelect").setValue(0);
             }
             webix.message(id ? "Film was updated" : "New film was added");
         }
@@ -80,7 +81,8 @@ const formRules = {
         return value !== 0 && webix.rules.isNotEmpty(value);
     },
     categoryId: function (value) {
-        return webix.rules.isNotEmpty(value);
+        
+        return value !== 0 && webix.rules.isNotEmpty(value);
     },
 };
 
@@ -88,7 +90,12 @@ const form = {
     gravity: 2,
     view: "form",
     id: "myForm",
-    elementsConfig: { invalidMessage: "Enter the correct value!" },
+    elementsConfig: { invalidMessage: "Enter the correct value!",
+    on: {
+        onFocus: function() {
+            $$('myForm').clearValidation();
+        }
+    } },
     elements: [formInputs, formBtns, {}],
     rules: formRules,
 };

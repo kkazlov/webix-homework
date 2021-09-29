@@ -3,13 +3,21 @@ const addBtn = {
     value: "Add new",
     css: "webix_primary",
     click: function () {
-        const input = $$("adminInput");
-
+        /* const input = $$("adminInput");
         if (input.validate()) {
             $$("categoriesDB").add({
                 value: input.getValue(),
             });
             input.setValue("");
+        } */
+        const form = $$("adminForm");
+
+        if (form.validate()) {
+            $$("categoriesDB").add({
+                value: $$("adminInput").getValue(),
+            });
+            form.clear();
+            $$('adminForm').clearValidation();
         }
     },
 };
@@ -18,14 +26,25 @@ const input = {
     view: "text",
     id: "adminInput",
     name: "category",
-    validate: webix.rules.isNotEmpty,
-    invalidMessage: "Enter a some value!",
+    invalidMessage: "Enter the correct value!",
+    on: {
+        onFocus: function() {
+            $$('adminForm').clearValidation();
+        }
+    }
 };
 
-const adminToolbar = {
-    view: "toolbar",
-    id: "adminToolbar",
-    cols: [input, addBtn],
+const adminForm = {
+    view: "form",
+    id: "adminForm",
+    rules: {
+        category: function (value) {
+            return webix.rules.isNotEmpty(value);
+        },
+    },
+    
+
+    elements: [input, addBtn],
 };
 
 const adminDatatable = {
@@ -63,7 +82,7 @@ const adminDatatable = {
 
 const admin = {
     id: "Admin",
-    rows: [adminToolbar, adminDatatable],
+    rows: [adminForm, adminDatatable],
 };
 
 export default admin;
