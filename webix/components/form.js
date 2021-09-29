@@ -1,3 +1,5 @@
+import { categoriesDB } from "../data/collections.js";
+
 const formInputs = {
     rows: [
         { template: "Edit films", type: "section" },
@@ -5,6 +7,13 @@ const formInputs = {
         { view: "text", label: "Year", name: "year" },
         { view: "text", label: "Rating", name: "rating" },
         { view: "text", label: "Votes", name: "votes" },
+        {
+            view:"richselect",
+            id: "formRichSelect",
+            label:"categoryId", 
+            value:0,
+            options: categoriesDB
+        }
     ],
 };
 
@@ -26,6 +35,7 @@ const saveBtn = {
                 myForm.save();
                 myForm.clear();
                 myTable.unselectAll();
+                $$("formRichSelect").setValue(0);
             }
             webix.message(id ? "Film was updated" : "New film was added");
         }
@@ -43,6 +53,7 @@ const clearBtn = {
             })
             .then(function () {
                 const form = $$("myForm");
+                $$("formRichSelect").setValue(0);
                 form.clear();
                 form.clearValidation();
             });
