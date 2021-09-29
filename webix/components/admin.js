@@ -1,15 +1,10 @@
+import { categoriesDB } from "../data/collections.js";
+
 const addBtn = {
     view: "button",
     value: "Add new",
     css: "webix_primary",
     click: function () {
-        /* const input = $$("adminInput");
-        if (input.validate()) {
-            $$("categoriesDB").add({
-                value: input.getValue(),
-            });
-            input.setValue("");
-        } */
         const form = $$("adminForm");
 
         if (form.validate()) {
@@ -17,7 +12,7 @@ const addBtn = {
                 value: $$("adminInput").getValue(),
             });
             form.clear();
-            $$('adminForm').clearValidation();
+            form.clearValidation();
         }
     },
 };
@@ -28,10 +23,10 @@ const input = {
     name: "category",
     invalidMessage: "Enter the correct value!",
     on: {
-        onFocus: function() {
-            $$('adminForm').clearValidation();
-        }
-    }
+        onFocus: function () {
+            $$("adminForm").clearValidation();
+        },
+    },
 };
 
 const adminForm = {
@@ -42,7 +37,6 @@ const adminForm = {
             return webix.rules.isNotEmpty(value);
         },
     },
-    
 
     elements: [input, addBtn],
 };
@@ -50,6 +44,7 @@ const adminForm = {
 const adminDatatable = {
     view: "datatable",
     id: "adminTable",
+    data: categoriesDB,
     editable: true,
     rules: {
         value: webix.rules.isNotEmpty,
@@ -74,6 +69,8 @@ const adminDatatable = {
                 })
                 .then(() => {
                     $$("categoriesDB").remove(id);
+                    $$("myForm").clear();
+                    $$("myTable").filterByAll();
                     return false;
                 });
         },

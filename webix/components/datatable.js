@@ -90,15 +90,16 @@ const dataTable = {
 
     columns: tableColumns,
     scrollX: false,
+    scheme: {
+        $init: function (obj) {
+            if (!obj.categoryId) {
+                obj.categoryId = Math.floor(1 + Math.random() * 4);
+            }
+        },
+    },
     on: {
         onAfterSelect: function () {
             $$("myForm").clearValidation();
-        },
-        onAfterLoad: function () {
-            this.data.each(function (obj) {
-                obj.categoryId = Math.floor(1 + Math.random() * 4);
-            });
-            this.refresh();
         },
     },
 

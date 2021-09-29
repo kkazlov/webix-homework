@@ -9,10 +9,8 @@ const formInputs = {
         { view: "text", label: "Votes", name: "votes" },
         {
             view: "richselect",
-            id: "formRichSelect",
             name: "categoryId",
             label: "categoryId",
-            value: 0,
             options: categoriesDB,
         },
     ],
@@ -32,13 +30,13 @@ const saveBtn = {
 
             if (id) {
                 myForm.save();
-                myTable.filterByAll();
             } else {
                 myForm.save();
-                myTable.filterByAll();
                 myForm.clear();
                 myTable.unselectAll();
             }
+
+            myTable.filterByAll();
             webix.message(id ? "Film was updated" : "New film was added");
         }
     },
@@ -55,7 +53,6 @@ const clearBtn = {
             })
             .then(function () {
                 const form = $$("myForm");
-                $$("formRichSelect").setValue(0);
                 form.clear();
                 form.clearValidation();
                 $$("myTable").unselectAll();
@@ -81,8 +78,7 @@ const formRules = {
         return value !== 0 && webix.rules.isNotEmpty(value);
     },
     categoryId: function (value) {
-        
-        return value !== 0 && webix.rules.isNotEmpty(value);
+        return webix.rules.isNotEmpty(value);
     },
 };
 
@@ -90,12 +86,14 @@ const form = {
     gravity: 2,
     view: "form",
     id: "myForm",
-    elementsConfig: { invalidMessage: "Enter the correct value!",
-    on: {
-        onFocus: function() {
-            $$('myForm').clearValidation();
-        }
-    } },
+    elementsConfig: {
+        invalidMessage: "Enter the correct value!",
+        on: {
+            onFocus: function () {
+                $$("myForm").clearValidation();
+            },
+        },
+    },
     elements: [formInputs, formBtns, {}],
     rules: formRules,
 };

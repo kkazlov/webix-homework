@@ -5,7 +5,15 @@ const categoriesDB = new webix.DataCollection({
 
 const usersDB = new webix.DataCollection({
     id:"usersDB",
-    url: '../../webix/data/users.js'
+    url: '../../webix/data/users.js',
+    scheme: {
+        $init: function (obj) {
+            if (obj.age < 26) {
+                obj.$css = "user-list__highlight";
+            }
+        },
+    },
+    
 });
 
 export { categoriesDB, usersDB };
