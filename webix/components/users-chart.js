@@ -1,3 +1,13 @@
+const groupChart = function () {
+    this.group({
+        by: "country",
+        map: {
+            count: ["country", "count"],
+        },
+    });
+    this.sort("country", "asc");
+};
+
 const usersChart = {
     view: "chart",
     type: "bar",
@@ -17,3 +27,4 @@ const usersChart = {
 };
 
 export default usersChart;
+export { groupChart };

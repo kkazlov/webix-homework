@@ -83,7 +83,7 @@ const list = {
                 </div>
             `;
     },
-
+    
     css: "user-list",
     select: true,
     onClick: {
@@ -92,8 +92,6 @@ const list = {
             return false;
         },
     },
-
-    url: "../../webix/data/users.js",
     scheme: {
         $init: function (obj) {
             if (obj.age < 26) {
@@ -101,20 +99,7 @@ const list = {
             }
         },
     },
-    on: {
-        onAfterLoad: function () {
-            $$("usersChart").sync($$("usersList"), function () {
-                $$("usersChart").group({
-                    by: "country",
-                    map: {
-                        count: ["country", "count"],
-                    },
-                });
-
-                $$("usersChart").sort("country", "asc");
-            });
-        },
-    },
+   
 };
 
 const usersList = {

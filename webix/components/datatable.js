@@ -1,4 +1,4 @@
-import categoriesDB from "../data/categories.js";
+import { categoriesDB } from "../data/collections.js";
 
 const compareFirstChar = (value, filter) => {
     value = value.toString().toLowerCase();
@@ -51,20 +51,21 @@ const tableColumns = [
 
 const tableReady = function () {
     $$("myForm").bind(this);
+
     this.registerFilter(
         $$("myTabbar"),
         {
             columnId: "year",
             compare: function (value, filter) {
-                switch(filter) {
-                    case "allFilms": 
+                switch (filter) {
+                    case "allFilms":
                         return value;
                     case "oldFilms":
                         return value < 1970;
-                    case "modernFilms": 
-                        return (value >= 1970 && value <= 2000);
-                    case "newFilms": 
-                        return (value > 2000);
+                    case "modernFilms":
+                        return value >= 1970 && value <= 2000;
+                    case "newFilms":
+                        return value > 2000;
                     default:
                         return value;
                 }
@@ -86,15 +87,16 @@ const dataTable = {
     id: "myTable",
     select: "row",
     hover: "datatable__hover",
-    scheme: {
-        $init: function (obj) {
-            const rnd = Math.floor(1 + Math.random() * 4);
-            obj.categoryId = rnd;
-        },
-    },
 
     columns: tableColumns,
     scrollX: false,
+    scheme: {
+        $init: function (obj) {
+            if (!obj.categoryId) {
+                obj.categoryId = Math.floor(1 + Math.random() * 4);
+            }
+        },
+    },
     on: {
         onAfterSelect: function () {
             $$("myForm").clearValidation();

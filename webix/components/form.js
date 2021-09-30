@@ -1,3 +1,5 @@
+import { categoriesDB } from "../data/collections.js";
+
 const formInputs = {
     rows: [
         { template: "Edit films", type: "section" },
@@ -5,6 +7,12 @@ const formInputs = {
         { view: "text", label: "Year", name: "year" },
         { view: "text", label: "Rating", name: "rating" },
         { view: "text", label: "Votes", name: "votes" },
+        {
+            view: "richselect",
+            name: "categoryId",
+            label: "categoryId",
+            options: categoriesDB,
+        },
     ],
 };
 
@@ -27,6 +35,8 @@ const saveBtn = {
                 myForm.clear();
                 myTable.unselectAll();
             }
+
+            myTable.filterByAll();
             webix.message(id ? "Film was updated" : "New film was added");
         }
     },
@@ -45,6 +55,7 @@ const clearBtn = {
                 const form = $$("myForm");
                 form.clear();
                 form.clearValidation();
+                $$("myTable").unselectAll();
             });
     },
 };
@@ -66,13 +77,23 @@ const formRules = {
     rating: function (value) {
         return value !== 0 && webix.rules.isNotEmpty(value);
     },
+    categoryId: function (value) {
+        return webix.rules.isNotEmpty(value);
+    },
 };
 
 const form = {
     gravity: 2,
     view: "form",
     id: "myForm",
-    elementsConfig: { invalidMessage: "Enter the correct value!" },
+    elementsConfig: {
+        invalidMessage: "Enter the correct value!",
+        on: {
+            onFocus: function () {
+                $$("myForm").clearValidation();
+            },
+        },
+    },
     elements: [formInputs, formBtns, {}],
     rules: formRules,
 };

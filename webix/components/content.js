@@ -5,6 +5,7 @@ import usersList from "./users-list.js";
 import usersChart from "./users-chart.js";
 import treetable from "./treetable.js";
 import datatableTabbar from "./datatable-tabbar.js";
+import admin from "./admin.js";
 
 const content = {
     cols: [
@@ -24,7 +25,7 @@ const content = {
                 },
                 { id: "Users", rows: [usersList, usersChart] },
                 treetable,
-                { id: "Locations" },
+                admin
             ],
         },
     ],
