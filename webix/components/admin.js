@@ -70,8 +70,6 @@ const adminDatatable = {
                 .then(() => {
                     $$("categoriesDB").remove(id);
                     $$("myForm").clear();
-                    $$("myTable").filterByAll();
-                    return false;
                 });
         },
     },
